@@ -3,15 +3,21 @@
 #The player clicks the tiles to move them into the empty space, while trying to arrange the numbers in order from 1 to 15 (lowest to highest). 
 #The program checks if the player won and displays a victory message when the puzzle is solved. 
 
+#imports:
+
+#Tkinter is the graphical interface used for this project.
 import tkinter
+#Random is a python modules that adds functions wich randomly choose integers, items from a list, etc.
 import random
 
+#variables
 spot_state=["x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x"]
 rand_spot=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 moveable_spots=[(2,5),(1,3,6),(2,4,7),(3,8),(1,6,9),(2,5,7,10),(3,6,8,11),(4,7,12),(5,10,13),(6,9,11,14),(7,10,12,15),(8,11,16),(9,14),(10,13,15),(11,14,16),(12,15)]
 spots=[]
 game_over=False
 
+#Function mouseClick registers and handles the left mouse click.
 def mouseClick(event):
     mousex=event.x
     mousey=event.y
@@ -28,6 +34,7 @@ def mouseClick(event):
                 break
         check_for_win()
 
+#Function check_for_win checks if the player has completed the puzzle, and if so, displays a victory message.
 def check_for_win():
     global game_over
     if all(spot_state[i]==i+1 for i in range(15)):
@@ -35,6 +42,7 @@ def check_for_win():
         canvas.delete("all")
         canvas.create_text(460/2,460/2,text="You won!")
 
+#Function scramble_tiles scrambles the tiles at the start of the program.
 def scramble_tiles():
     global spot_state
     for nun in range(5000):
@@ -48,9 +56,11 @@ def scramble_tiles():
                     spot_state[spot_num-1] = "x"
                     break
 
+#Initiation of the canvas.
 canvas=tkinter.Canvas(width=460,height=460)
 canvas.pack()
 
+#This for loop makes the grid pattern.
 liney=115
 linex=115
 for i in range(3):
@@ -59,6 +69,7 @@ for i in range(3):
     canvas.create_line(0,liney,460,liney)
     liney+=115
 
+#This for loop draws the numbers on the tiles.
 for i in range(16):
     x=(i%4)*115+57.5
     y=(i//4)*115+57.5
@@ -69,8 +80,10 @@ for i in range(16):
         text=canvas.create_text(x,y,text="",font=('Arial',30,'bold italic'))
     spots.append(text)
 
+#Calling the scramble_tiles function.
 scramble_tiles()
 
+#This binds the left mouse click to the function mouseClick.
 canvas.bind("<Button-1>", mouseClick)
 
 tkinter.mainloop()
