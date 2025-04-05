@@ -1,3 +1,11 @@
+# This is a simple version of the Tower of Hanoi game made with Python, using Tkinter.
+# At the start, the player chooses a difficulty: Easy, Normal, or Hard.
+# The number of disks depends on the difficulty selected.
+# The goal is to move all the disks from the first tower to the third one.
+# You can only move one disk at a time, and you can't place a bigger disk on a smaller one.
+# The player moves the disks by clicking on the towers.
+# If all the disks are stacked correctly on the third tower, the game shows a "You win!" message.
+
 import tkinter
 
 global towers,colors,selected,win,difficulty,difficulty_selected
