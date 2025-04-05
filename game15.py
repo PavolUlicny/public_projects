@@ -1,3 +1,8 @@
+#This is a simple virtual version of the puzzle "Game 15", created with Python, using Tkinter.
+#The game randomly scrambles 15 tiles with numbers in a 4×4 grid, with one empty space. 
+#The player clicks the tiles to move them into the empty space, while trying to arrange the numbers in order from 1 to 15 (lowest to highest). 
+#The program checks if the player won and displays a victory message when the puzzle is solved. 
+
 import tkinter
 import random
 
