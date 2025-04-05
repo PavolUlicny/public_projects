@@ -7,7 +7,7 @@
 
 #Tkinter is the graphical interface used for this project.
 import tkinter
-#Random is a python modules that adds functions wich randomly choose integers, items from a list, etc.
+#Random is a python module that adds functions which randomly choose integers, items from a list, etc.
 import random
 
 #variables
@@ -42,10 +42,10 @@ def check_for_win():
         canvas.delete("all")
         canvas.create_text(460/2,460/2,text="You won!")
 
-#Function scramble_tiles scrambles the tiles at the start of the program.
+#Function scramble_tiles shuffles the tiles at the start of the program.
 def scramble_tiles():
     global spot_state
-    for nun in range(5000):
+    for _ in range(5000):
         spot_num = random.randint(1, 16)
         if not spot_state[spot_num-1]=="x":
             for i in moveable_spots[spot_num-1]:
