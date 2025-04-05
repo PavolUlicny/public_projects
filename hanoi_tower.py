@@ -6,8 +6,10 @@
 # The player moves the disks by clicking on the towers.
 # If all the disks are stacked correctly on the third tower, the game shows a "You win!" message.
 
+#imports
 import tkinter
 
+#variables
 global towers,colors,selected,win,difficulty,difficulty_selected
 win=0
 selected=0
@@ -18,18 +20,21 @@ disks=[]
 colors=["white","lightskyblue","steelblue","cyan","blue","teal"]
 texts=["Easy","Normal","Hard"]
 
+#This function moves a disk to the correct position on the screen.
 def draw_disk(disk_size,tower):
     global towers,colors,win
     y=250-(len(towers[tower-1]))*15
     canvas.coords(disks[disk_size-1],65-disk_size*10+200*(tower-1),y,135+disk_size*10+200*(tower-1),y-15)
 
+#This function displays the difficulty options on the screen.
 def select_difficulty():
     global texts, difficulty, difficulty_selected
     x1=100
     for i in texts:
         canvas.create_text(x1,150,text=i,font=('Arial',30,'bold italic'))
         x1+=200
-    
+
+#This function starts the game after selecting the difficulty.
 def game_start():
     global towers,colors,win,difficulty,difficulty_selected
     canvas.delete("all")
@@ -52,7 +57,8 @@ def game_start():
         disk=canvas.create_rectangle(65-i*10,y,135+i*10,y-15,fill=colors[i-1])
         disks.append(disk)
     disks.reverse()
-    
+
+#This function handles the mouse clicks for selecting and moving disks.
 def mouseClick(event):
     global towers,colors,selected,selection,win,difficulty,difficulty_selected
     detect_win()
@@ -86,6 +92,7 @@ def mouseClick(event):
         difficulty_selected=True
         game_start()
 
+#This function checks if the player has won the game.
 def detect_win():
     global win,towers,difficulty
     if difficulty==1 and towers[2]==[4,3,2,1] or difficulty==2 and towers[2]==[5,4,3,2,1] or difficulty==3 and towers[2]==[6,5,4,3,2,1]:
@@ -93,11 +100,15 @@ def detect_win():
         canvas.delete("all")
         canvas.create_text(300,150,text="You win!",font=('Arial',30,'bold italic'))
 
+#Create the window and canvas.
 canvas=tkinter.Canvas(width=600,height=300)
 canvas.pack()
 
+#Runs the select_difficulty function.
 select_difficulty()
 
+#Bind mouse clicks to the mouseClick function.
 canvas.bind("<Button-1>", mouseClick)
 
+#Runs the program.
 tkinter.mainloop()
