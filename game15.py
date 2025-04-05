@@ -86,4 +86,5 @@ scramble_tiles()
 #This binds the left mouse click to the function mouseClick.
 canvas.bind("<Button-1>", mouseClick)
 
+#Runs the program.
 tkinter.mainloop()
