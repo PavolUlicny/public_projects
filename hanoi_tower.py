@@ -110,5 +110,5 @@ select_difficulty()
 #Bind mouse clicks to the mouseClick function.
 canvas.bind("<Button-1>", mouseClick)
 
-#Runs the program.
+#Start the Tkinter main loop.
 tkinter.mainloop()
