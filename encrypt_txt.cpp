@@ -13,15 +13,15 @@
 //function to encrypt text
 std::string encrypt(const std::string& text) {
 
-	//check if the input text is empty
+    //check if the input text is empty
     if (text.empty()) {
         return "";
     }
 
-	//initialize string
+    //initialize string
     std::string line;
 
-	//generate a random key
+    //generate a random key
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(1, 100);
@@ -29,21 +29,21 @@ std::string encrypt(const std::string& text) {
     std::uniform_int_distribution<> distr1(1, roof);
     int key = distr1(gen);
 
-	//initialize a vector to hold lines
+    //initialize a vector to hold lines
 	std::vector<std::string> lines;
 
     //a string stream to read the input text
     std::istringstream sstream(text);
 
-	//read the input text line by line
+    //read the input text line by line
     while (std::getline(sstream, line)) {
         lines.push_back(line);
     }
 
-	//initialize a matrix to hold the encrypted lines
+    //initialize a matrix to hold the encrypted lines
     std::vector<std::vector<int>> line_matrix(lines.size() + 1);
 
-	//encrypt each character in the lines and store in the matrix
+    //encrypt each character in the lines and store in the matrix
     for (size_t i = 0; i < lines.size(); ++i) {
         for (char c : lines[i]) {
 			unsigned char uc = static_cast<unsigned char>(c);
@@ -51,10 +51,10 @@ std::string encrypt(const std::string& text) {
         }
     }
 
-	//add the key to the matrix
+    //add the key to the matrix
     line_matrix[lines.size()].push_back(key);
 
-	//initialize a string to hold the result
+    //initialize a string to hold the result
     std::string result;
 
     //convert the matrix to a string
@@ -70,39 +70,39 @@ std::string encrypt(const std::string& text) {
         }
     }
     
-	//return the encrypted text
+    //return the encrypted text
     return result;
 }
 
 //function to decrypt text
 std::string decrypt(const std::string& text) {
 
-	//check if the input text is empty
+    //check if the input text is empty
     if (text.empty()) {
         return "";
 	}
 
-	//initialize a string to hold the line
+    //initialize a string to hold the line
     std::string line;
 
-	//initialize a matrix to hold the lines
+    //initialize a matrix to hold the lines
     std::vector<std::vector<int>> line_matrix;
 
-	//a string stream to read the input text
+    //a string stream to read the input text
     std::istringstream sstream(text);
 
-	//initialize a vector to hold numbers
+    //initialize a vector to hold numbers
     std::vector<int> numbers;
 
-	//read the input text line by line and parse the numbers
+    //read the input text line by line and parse the numbers
     while (std::getline(sstream, line)) {
 
-		//skip empty lines
+        //skip empty lines
         if (line.empty()) {
             continue;
 		}
 
-		//split the line by commas and convert to integers
+	//split the line by commas and convert to integers
         std::istringstream line_stream(line);
         std::string number;
         std::vector<int> numbers;
@@ -114,20 +114,20 @@ std::string decrypt(const std::string& text) {
             }
         }
 
-		//if the numbers vector is not empty, add it to the line_matrix
+	//if the numbers vector is not empty, add it to the line_matrix
         if (!numbers.empty()) {
             line_matrix.push_back(numbers);
 		}
     }
 
-	//get the key from the matrix and remove it
+    //get the key from the matrix and remove it
     int key = line_matrix.back()[0];
     line_matrix.pop_back();
 
-	//initialize a string to hold the result
+    //initialize a string to hold the result
     std::string result;
 
-	//decrypt each line by subtracting the key from each number
+    //decrypt each line by subtracting the key from each number
     for (const std::vector<int>& numbers : line_matrix) {
 
         for (int num : numbers) {
@@ -137,7 +137,7 @@ std::string decrypt(const std::string& text) {
         result += '\n';
     }
 
-	//return the decrypted text
+    //return the decrypted text
     return result;
 }
 
