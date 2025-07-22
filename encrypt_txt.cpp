@@ -1,14 +1,11 @@
 //functions to encrypt and decrypt text files using ASCII values and a random key
-//so far, the code can't handle some special characters, but it can handle most ASCII characters
-//i will try to fix this in the future
+//the code can't handle some special characters, but it can handle most ASCII characters
 
 //include modules
-#include <fstream>
 #include <string>
 #include <vector>
 #include <random>
 #include <sstream>
-#include <iostream>
 
 //function to encrypt text
 std::string encrypt(const std::string& text) {
@@ -65,7 +62,7 @@ std::string encrypt(const std::string& text) {
                 result += ",";
             }
         }
-        if (i < lines.size()) {
+        if (i != lines.size()) {
             result += "\n";
         }
     }
@@ -128,14 +125,16 @@ std::string decrypt(const std::string& text) {
     std::string result;
 
 	//decrypt each line by subtracting the key from each number
-    for (const std::vector<int>& numbers : line_matrix) {
-
+    for (size_t i = 0; i < line_matrix.size(); ++i) {
+        const std::vector<int>& numbers = line_matrix[i];
         for (int num : numbers) {
             result += static_cast<char>(num - key);
         }
-
-        result += '\n';
+        if (i != line_matrix.size() - 1) {
+            result += '\n';
+        }
     }
+
 
 	//return the decrypted text
     return result;
