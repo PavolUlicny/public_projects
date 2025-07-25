@@ -63,7 +63,6 @@ void hex_viewer() {
 		return;
 	}
 
-
 	//save the file size
 	file.seekg(0, std::ios::end);
 	std::streampos file_size = file.tellg();
