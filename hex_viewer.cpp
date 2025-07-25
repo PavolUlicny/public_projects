@@ -2,7 +2,7 @@
 //to start, enter the name of the file you want to use with the file header (has to be in the same directory as the .cpp file)
 //then, enter on which byte in the text file you want to start (0 for the start of the file)
 //it prints a question mark (?) for characters that it can't print
-//heavily inspired by the hexed.it hex editor
+//heavily inspired by the "hexed.it" hex editor
 
 
 //include necessary modules
