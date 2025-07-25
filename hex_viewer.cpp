@@ -35,14 +35,34 @@ void hex_viewer() {
 	//ask for the byte position
 	std::cout << "Enter byte position: ";
 	unsigned long long position;
-	std::cin >> position;
+	std::string input;
+	std::getline(std::cin, input);
+
+	//check if the input is a valid number
+	bool valid = true;
+	for (char c : input) {
+		if (!std::isdigit(static_cast<unsigned char>(c))) {
+			valid = false;
+			break;
+		}
+	}
 
 	//check if the input is valid
-	if (std::cin.fail() || position < 0) {
+	if (std::cin.fail() || input.empty() || !valid) {
 		std::cerr << "Invalid byte position." << std::endl;
 		file.close();
 		return;
 	}
+
+	//convert the input to an unsigned long long
+	try {
+		position = std::stoull(input);
+	} catch (const std::out_of_range& e) {
+		std::cerr << "Byte position is out of range." << std::endl;
+		file.close();
+		return;
+	}
+
 
 	//save the file size
 	file.seekg(0, std::ios::end);
@@ -51,6 +71,7 @@ void hex_viewer() {
 	//check if the position is valid
 	if (position >= file_size) {
 		std::cerr << "Position is beyond end of file." << std::endl;
+		file.close();
 		return;
 	}
 
