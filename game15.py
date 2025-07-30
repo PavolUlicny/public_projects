@@ -14,6 +14,7 @@ class Game15:
 
         #Initiation of the canvas.
         root.title("Game 15")
+        root.resizable(False, False)
         self.canvas = tkinter.Canvas(root, width = 460, height = 460)
         self.canvas.pack()
 
