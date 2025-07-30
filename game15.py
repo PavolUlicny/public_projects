@@ -13,6 +13,7 @@ class Game15:
     def __init__(self, root):
 
         #Initiation of the canvas.
+        root.title("Game 15")
         self.canvas = tkinter.Canvas(root, width = 460, height = 460)
         self.canvas.pack()
 
@@ -95,6 +96,5 @@ class Game15:
 #If this file is run directly, it creates a Tkinter window and starts the game.
 if __name__ == "__main__":
     root = tkinter.Tk()
-    root.title("Game 15")
     game = Game15(root)
     root.mainloop()
