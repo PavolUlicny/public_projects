@@ -13,7 +13,7 @@ class Game15:
     def __init__(self, root):
 
         #Initiation of the canvas.
-        self.canvas=tkinter.Canvas(root, width = 460, height = 460)
+        self.canvas = tkinter.Canvas(root, width = 460, height = 460)
         self.canvas.pack()
 
         #This binds the left mouse click to the function mouseClick.
@@ -77,10 +77,10 @@ class Game15:
             if not self.game_over:
                 for i in self.moveable_spots[spot_num - 1]:
                     if self.spot_state[i - 1] == "x":
-                        self.spot_state[i - 1]=self.spot_state[spot_num - 1]
-                        self.canvas.itemconfig(self.spots[i - 1],text = self.spot_state[spot_num - 1])
-                        self.canvas.itemconfig(self.spots[spot_num - 1],text = "")
-                        self.spot_state[spot_num-1] = "x"
+                        self.spot_state[i - 1] = self.spot_state[spot_num - 1]
+                        self.canvas.itemconfig(self.spots[i - 1], text = self.spot_state[spot_num - 1])
+                        self.canvas.itemconfig(self.spots[spot_num - 1], text = "")
+                        self.spot_state[spot_num - 1] = "x"
                         break
                 self.check_for_win()
 
@@ -89,7 +89,7 @@ class Game15:
         if all(self.spot_state[i] == i + 1 for i in range(15)):
             self.game_over = True
             self.canvas.delete("all")
-            self.canvas.create_text(460 / 2,460 / 2, text = "You won!")
+            self.canvas.create_text(460 / 2, 460 / 2, text = "You won!", font = ('Arial', 40, 'bold'))
 
 
 #If this file is run directly, it creates a Tkinter window and starts the game.
