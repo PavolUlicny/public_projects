@@ -8,7 +8,6 @@
 
 #imports
 import tkinter
-from turtle import window_height
 
 class HanoiTower:
 
