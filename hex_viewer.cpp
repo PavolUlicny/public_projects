@@ -66,9 +66,10 @@ void hex_viewer() {
 	//save the file size
 	file.seekg(0, std::ios::end);
 	std::streampos file_size = file.tellg();
+	unsigned long long file_size_ull = static_cast<unsigned long long>(file_size);
 
 	//check if the position is valid
-	if (position >= file_size) {
+	if (position >= file_size_ull) {
 		std::cerr << "Position is beyond end of file." << std::endl;
 		file.close();
 		return;
