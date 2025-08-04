@@ -121,7 +121,7 @@ void hex_viewer() {
 		}
 
 		for (int i = buffer.size(); i < bytes_per_line; ++i) {
-			std::cout << "    ";
+			std::cout << "   ";
 		}
 
 		std::cout << "    ";
