@@ -254,7 +254,7 @@ public:
     void createCircle(int32_t centerX, int32_t centerY, int32_t radius, int r, int g, int b, bool fill) {
 
 		// Check if the radius is valid
-        if (radius < 0) {
+        if (radius <= 0) {
             return;
         }
 
