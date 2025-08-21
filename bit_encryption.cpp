@@ -1,7 +1,6 @@
 //this code uses a simple XOR bit encryption and decryption mechanism.
-//the encryption function takes a string, generates a random key, and returns a vector of encrypted bytes.
-//the decryption function takes a vector of encrypted bytes and returns the original string.
-//works with any text input, including special characters and spaces.
+//the encryption function takes a vector of bytes, generates a random key, and returns a vector of encrypted bytes.
+//the decryption function takes a vector of encrypted bytes and returns the original vector of bytes.
 
 //include modules
 #include <string>
@@ -12,56 +11,56 @@
 
 class BitEncryption {
     //function to encrypt text
-    std::vector<uint8_t> encrypt(const std::string& text1) {
+    std::vector<uint8_t> encrypt(const std::vector<uint8_t>& originalBytes) {
 
         //check if the input text is empty
-        if (text1.empty()) {
+        if (originalBytes.empty()) {
             return {};
         }
 
         //generate a random key
         srand(time(NULL));
-        uint8_t key = rand() % 256;
+        uint8_t key = (rand() % 255) + 1;
 
         //initialize a vector to hold the encrypted bytes
-        std::vector<uint8_t> byte_vector;
+        std::vector<uint8_t> encryptedByteVector;
 
-        //encrypt each character in the text by adding the key
-        for (char c : text1) {
-            byte_vector.push_back(static_cast<uint8_t>(c) ^ key);
+        //encrypt each byte in the vector by adding the key
+        for (uint8_t byte : originalBytes) {
+            encryptedByteVector.push_back(byte ^ key);
         }
 
         //add the key to the vector
-        byte_vector.push_back(key);
+        encryptedByteVector.push_back(key);
 
         //return the encrypted text
-        return byte_vector;
+        return encryptedByteVector;
     }
 
     //function to decrypt text
-    std::string decrypt(const std::vector<uint8_t>& encrypted) {
+    std::vector<uint8_t> decrypt(const std::vector<uint8_t>& encrypted) {
 
-        //check if the encrypted vector is empty
-        if (encrypted.empty()) {
-            return "";
+        //check if the encrypted vector is empty or if its only the key
+        if (encrypted.size() < 2) {
+            return {};
         }
 
         //get the key from the last byte
         uint8_t key = encrypted.back();
 
-        std::string decrypted;
+        std::vector<uint8_t> decrypted;
 
-        // XOR each byte (except last) with the key to get original chars
+        // XOR each byte (except last) with the key to get original bytes
         for (size_t i = 0; i < encrypted.size() - 1; ++i) {
-            decrypted.push_back(static_cast<char>(encrypted[i] ^ key));
+            decrypted.push_back(static_cast<uint8_t>(encrypted[i] ^ key));
         }
 
-        //return the decrypted text
+        //return the decrypted vector
         return decrypted;
     }
 };
 
 int main() {
-    
+
 	return 0;
 }
