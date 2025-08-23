@@ -84,7 +84,7 @@ void hex_viewer() {
 	std::vector<unsigned char> buffer;
 
 	//set the number of bytes per line
-	int bytes_per_line = 20;
+	int bytes_per_line = 16;
 
 	//print the position (only of the first byte of each line), hex values, and ASCII representation of the bytes
 	char byte;
