@@ -20,11 +20,11 @@ void hex_viewer() {
 	//set console output to UTF-8 (to support some special characters)
 	SetConsoleOutputCP(CP_UTF8);
 
-	//ask for file name
-	std::string file_name = "";
-	std::cout << "Enter file name: ";
-	std::getline(std::cin >> std::ws, file_name);
-	std::ifstream file(file_name, std::ios::binary);
+	//ask for file path
+	std::string file_path = "";
+	std::cout << "Enter file path: ";
+	std::getline(std::cin >> std::ws, file_path);
+	std::ifstream file(file_path, std::ios::binary);
 
 	//check if file is open
 	if (!file.is_open()) {
