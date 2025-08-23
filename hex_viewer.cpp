@@ -13,22 +13,36 @@
 #include <windows.h>
 #include <iomanip>
 #include <cctype>
+#include <filesystem>
 
 //function with the code 
 void hex_viewer() {
 
 	//set console output to UTF-8 (to support some special characters)
 	SetConsoleOutputCP(CP_UTF8);
+	//set console input to UTF-8 so paths typed in the console work
+	SetConsoleCP(CP_UTF8);
 
 	//ask for file path
 	std::string file_path = "";
 	std::cout << "Enter file path: ";
 	std::getline(std::cin >> std::ws, file_path);
-	std::ifstream file(file_path, std::ios::binary);
+
+	//strip optional surrounding quotes (useful when paths are pasted with quotes)
+	if (!file_path.empty() && (file_path.front() == '"' || file_path.front() == '\'')) {
+		char q = file_path.front();
+		if (file_path.back() == q && file_path.size() >= 2) {
+			file_path = file_path.substr(1, file_path.size() - 2);
+		}
+	}
+
+	//build a filesystem path from UTF-8 input to properly support Unicode on Windows
+	std::filesystem::path path = std::filesystem::u8path(file_path);
+	std::ifstream file(path, std::ios::binary);
 
 	//check if file is open
 	if (!file.is_open()) {
-		std::cerr << "Failed to open file." << std::endl;
+		std::cerr << "Failed to open file. Make sure the path exists.\n" << std::endl;
 		return;
 	}
 
