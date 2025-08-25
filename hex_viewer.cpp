@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <windows.h>
 #include <iomanip>
 #include <cctype>
 #include <filesystem>
@@ -17,11 +16,6 @@
 // function with the code
 void hex_viewer()
 {
-
-	// set console output to UTF-8 (to support some special characters)
-	SetConsoleOutputCP(CP_UTF8);
-	// set console input to UTF-8 so paths typed in the console work
-	SetConsoleCP(CP_UTF8);
 
 	// ask for file path
 	std::string file_path = "";
